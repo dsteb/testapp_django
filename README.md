@@ -2,7 +2,7 @@
 
 First fork the repository from Github, clone it, and switch to the new directory:
 
-    $ git clone git@github.com/USERNAME/testapp_django.git
+    $ git clone https://github.com/USERNAME/testapp_django.git
     $ cd testapp_django
     
 Activate the virtualenv for your project.
