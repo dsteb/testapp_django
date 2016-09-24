@@ -1,6 +1,8 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, View
+from django.urls import reverse
 
 from .forms import UserForm
 
@@ -12,11 +14,17 @@ class LoginView(TemplateView, View):
         return self.render_to_response({})
 
     def post(self, request, *args, **kwargs):
-        # TODO: Implement logging in
-        messages.warning(request, "Logging in not implemented")
-
-        return redirect(request.POST.get('next', 'home'))
-
+        username = request.POST['username']
+        password = request.POST['password']
+        nextPage = request.POST.get('next')
+        nextPage = nextPage if nextPage else 'home'
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect(request, nextPage)
+        else:
+            messages.warning(request, 'Wrong credentials')
+            return redirect(reverse('login'))
 
 class LogoutView(View):
     def post(self, request, *args, **kwargs):
@@ -38,6 +46,7 @@ class RegisterView(TemplateView):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save()
+            login(request, user)
             return redirect('home')
         else:
             return self.render_to_response({'form': form})
