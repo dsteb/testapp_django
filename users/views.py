@@ -10,17 +10,22 @@ class LoginView(TemplateView, View):
     template_name = 'users/login.html'
 
     def get(self, request, *args, **kwargs):
-        return self.render_to_response({})
+        if request.user.is_authenticated:
+            return redirect('home')
+        else:
+            return self.render_to_response({})
 
     def post(self, request, *args, **kwargs):
         username = request.POST['username']
         password = request.POST['password']
         nextPage = request.POST.get('next')
-        nextPage = nextPage if nextPage else 'home'
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return redirect(request, nextPage)
+            if nextPage:
+                return redirect(request, nextPage)
+            else:
+                return redirect('home')
         else:
             messages.warning(request, 'Wrong credentials')
             return redirect('login')
