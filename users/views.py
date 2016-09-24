@@ -2,6 +2,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, View
 
+from .forms import UserForm
+
 
 class LoginView(TemplateView, View):
     template_name = 'users/login.html'
@@ -27,9 +29,10 @@ class RegisterView(TemplateView):
     template_name = 'users/register.html'
 
     def get(self, request, *args, **kwargs):
-        # TODO: Implement registration
-        messages.warning(request, "Registration not implemented")
-        return self.render_to_response({})
+        if request.user.is_authenticated:
+            return redirect('home')
+        else:
+            return self.render_to_response({'form': UserForm()})
 
     def post(self, request, *args, **kwargs):
         # TODO: Implement registration
