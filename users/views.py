@@ -35,6 +35,9 @@ class RegisterView(TemplateView):
             return self.render_to_response({'form': UserForm()})
 
     def post(self, request, *args, **kwargs):
-        # TODO: Implement registration
-        messages.warning(request, "Registration not implemented")
-        return redirect('home')
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('home')
+        else:
+            return self.render_to_response({'form': form})
