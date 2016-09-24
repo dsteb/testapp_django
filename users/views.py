@@ -1,8 +1,7 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, View
-from django.urls import reverse
 
 from .forms import UserForm
 
@@ -24,13 +23,15 @@ class LoginView(TemplateView, View):
             return redirect(request, nextPage)
         else:
             messages.warning(request, 'Wrong credentials')
-            return redirect(reverse('login'))
+            return redirect('login')
 
 class LogoutView(View):
     def post(self, request, *args, **kwargs):
-        # TODO: Implement logging out
-        messages.warning(request, "Logging out not implemented")
-        return redirect('home')
+        if request.user.is_authenticated:
+            logout(request)
+            return redirect('home')
+        else:
+            return redirect('login')
 
 
 class RegisterView(TemplateView):
