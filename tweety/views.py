@@ -18,7 +18,7 @@ class TimelineView(TemplateView, View):
             followed = request.user.userprofile.follows.all()
             latest_tweets = Tweet.objects.filter(profile__in=followed).order_by('-pub_datetime')[:25]
         else:
-            latest_tweets = Tweet.objects.all().order_by('-pub_datetime')
+            latest_tweets = Tweet.objects.all().order_by('-pub_datetime')[:10]
         return self.render_to_response({"latest_tweets": latest_tweets})
 
     def post(self, request, *args, **kwargs):

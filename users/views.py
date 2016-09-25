@@ -24,7 +24,7 @@ class LoginView(TemplateView, View):
         if user:
             login(request, user)
             if nextPage:
-                return redirect(request, nextPage)
+                return redirect(nextPage)
             else:
                 return redirect('home')
         else:
