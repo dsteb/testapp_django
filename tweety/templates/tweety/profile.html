@@ -8,27 +8,23 @@
                         <img src="http://placehold.it/150x150" alt="" class="img-rounded img-responsive"/>
                     </div>
                     <div class="col-sm-6 col-md-8">
-                        <h4>
-                            charlie_kelly</h4>
-                        <small><cite title="Philadelphia, USA">Philadelphia, USA <i
-                                class="glyphicon glyphicon-map-marker">
-                        </i></cite></small>
+                        <h4>{{ profile_user.username }}</h4>
                         <p>
-                            <!-- Split button -->
-                        <div class="btn-group">
-                            <form action="{{ request.path }}" method="post">
-                                {% csrf_token %}
-                                {# Change the value of the id here #}
-                                <input hidden name="toggle_follow" value="1">
-                                {# If following show "unfollow" otherwise "follow"#}
-                                <button type="submit" class="btn btn-primary">Follow</button>
-                            </form>
-                        </div>
+                        {% if profile_user != request.user %}
+                            <div class="btn-group">
+                                <form action="{{ request.path }}" method="post">
+                                    {% csrf_token %}
+                                    <input hidden name="toggle_follow" value="{{ profile_user.username.id }}">
+                                    <button type="submit" class="btn btn-primary">{{ follows|yesno:"Unfollow,Follow" }}</button>
+                                </form>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-10 col-md-offset-1">
+            {% if latest_tweets %}
             <ul class="timeline">
                 <li class="timeline-inverted">
                     <div class="timeline-badge primary"><a title="11 hours ago via Twitter"><i
@@ -53,29 +49,10 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <div class="timeline-badge primary"><a title="11 hours ago via Twitter"><i
-                            class="glyphicon glyphicon-time invert" id=""></i></a></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-header">
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <img class="img-responsive img-rounded"
-                                         src="http://placehold.it/40x40">
-                                </div>
-                                <div class="col-xs-8">
-                                    <a href="{% url 'profile' id=1 %}">charlie_kelly </a> shared 6 hours ago
-                                </div>
-                            </div>
-                        </div>
-                        <div class="timeline-body">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. </p>
-                        </div>
-                    </div>
-                </li>
             </ul>
+            {% else %}
+            <div class="alert alert-info">There is no latest tweets</div>
+            {% endif %}
         </div>
     </div>
 
