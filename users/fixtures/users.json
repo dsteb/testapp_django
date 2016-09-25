@@ -1,0 +1,27 @@
+[
+{
+    "model": "users.userprofile",
+    "pk": 1,
+    "fields": {
+        "follows": [
+            3
+        ]
+    }
+},
+{
+    "model": "users.userprofile",
+    "pk": 2,
+    "fields": {
+        "follows": []
+    }
+},
+{
+    "model": "users.userprofile",
+    "pk": 3,
+    "fields": {
+        "follows": [
+            1
+        ]
+    }
+}
+]

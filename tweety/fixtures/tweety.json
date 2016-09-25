@@ -1,0 +1,119 @@
+[
+{
+    "model": "tweety.tweet",
+    "pk": 2,
+    "fields": {
+        "profile": 1,
+        "message": "Hello Botswana.",
+        "pub_datetime": "2016-09-25T13:36:55.038Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 3,
+    "fields": {
+        "profile": 1,
+        "message": "Hello Victoria Falls.",
+        "pub_datetime": "2016-09-25T13:39:23.820Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 4,
+    "fields": {
+        "profile": 1,
+        "message": "Hello Johannesburg!",
+        "pub_datetime": "2016-09-25T13:39:34.379Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 5,
+    "fields": {
+        "profile": 1,
+        "message": "Sign up today for my clean code course in Austin on 14 Nov.",
+        "pub_datetime": "2016-09-25T13:40:42.258Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 6,
+    "fields": {
+        "profile": 1,
+        "message": "Hello Capetown!",
+        "pub_datetime": "2016-09-25T13:41:42.713Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 7,
+    "fields": {
+        "profile": 1,
+        "message": "Hello Dubai.",
+        "pub_datetime": "2016-09-25T13:42:12.102Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 8,
+    "fields": {
+        "profile": 1,
+        "message": "Sully. Great movie.",
+        "pub_datetime": "2016-09-25T13:42:28.605Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 9,
+    "fields": {
+        "profile": 1,
+        "message": "I'm considering a clean code course in Austin in November.  Who's interested?",
+        "pub_datetime": "2016-09-25T13:42:51.393Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 10,
+    "fields": {
+        "profile": 1,
+        "message": "Great Interview with a good friend. ",
+        "pub_datetime": "2016-09-25T13:43:06.326Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 11,
+    "fields": {
+        "profile": 1,
+        "message": "New Blog:  The Lurn.  ",
+        "pub_datetime": "2016-09-25T15:20:48.364Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 12,
+    "fields": {
+        "profile": 1,
+        "message": "Brilliant!",
+        "pub_datetime": "2016-09-25T15:21:05.457Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 13,
+    "fields": {
+        "profile": 2,
+        "message": "2032. Binary enough. We drove the Tesla here today with Ziggy and Zelda.",
+        "pub_datetime": "2016-09-25T15:24:19.520Z"
+    }
+},
+{
+    "model": "tweety.tweet",
+    "pk": 14,
+    "fields": {
+        "profile": 3,
+        "message": "For some more context on the protests of the Dakota Access pipeline, I strongly recommend this BBC photo essay:",
+        "pub_datetime": "2016-09-25T15:31:24.709Z"
+    }
+}
+]
