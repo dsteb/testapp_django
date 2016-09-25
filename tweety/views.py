@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, get_object_or_404
@@ -5,6 +6,8 @@ from django.views import View
 from django.views.generic import TemplateView
 
 from users.models import UserProfile
+
+from .models import Tweet
 
 
 class TimelineView(TemplateView, View):
@@ -19,10 +22,13 @@ class TimelineView(TemplateView, View):
         return self.render_to_response({})
 
     def post(self, request, *args, **kwargs):
-        # TODO: Implement posting new tweets
-        messages.warning(request, "Posting new tweets not implemented")
-
-        return redirect(request.POST.get('next', 'home'))
+        if not request.user.is_authenticated:
+            return redirect('login')
+        else:
+            message = request.POST['message']
+            tweet = Tweet(profile=request.user.userprofile, message=message, pub_datetime=timezone.now())
+            tweet.save()
+            return redirect('home')
 
 
 class ProfileView(LoginRequiredMixin, TemplateView, View):
@@ -30,8 +36,9 @@ class ProfileView(LoginRequiredMixin, TemplateView, View):
 
     def get(self, request, *args, **kwargs):
         profile = get_object_or_404(UserProfile, pk=kwargs['id'])
+        latest_tweets = profile.tweet_set.all()[:10]
         return self.render_to_response({
-            'latest_tweets': [],
+            'latest_tweets': latest_tweets,
             'profile_user': profile.user,
             'follows': request.user.userprofile.is_following(profile.user.id)
         })

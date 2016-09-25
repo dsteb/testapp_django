@@ -5,11 +5,10 @@
         <div class="col-md-10 col-md-offset-1">
             <ul class="timeline">
                 <li>
-                    <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-time invert" title="Now"
-                                                              id=""></i></a></div>
+                    <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-time invert" title="Now" id=""></i></a></div>
                     <div class="timeline-panel">
-                        <form action="update.php" method="post" role="form" enctype="multipart/form-data"
-                              class="facebook-share-box">
+                        <form action="{% url 'home' %}" method="post" role="form" class="facebook-share-box">
+                            {% csrf_token %}
                             <div class="timeline-body">
                                 <div class="share-form">
                                     <div class="share">

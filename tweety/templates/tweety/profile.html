@@ -26,8 +26,9 @@
         <div class="col-md-10 col-md-offset-1">
             {% if latest_tweets %}
             <ul class="timeline">
+            {% for tweet in latest_tweets %}
                 <li class="timeline-inverted">
-                    <div class="timeline-badge primary"><a title="11 hours ago via Twitter"><i
+                    <div class="timeline-badge primary"><a title="{{ tweet.pub_datetime|timesince }} ago"><i
                             class="glyphicon glyphicon-time invert" id=""></i></a></div>
                     <div class="timeline-panel">
                         <div class="timeline-header">
@@ -37,18 +38,17 @@
                                          src="http://placehold.it/40x40">
                                 </div>
                                 <div class="col-xs-8">
-                                    <a href="{% url 'profile' id=1 %}">charlie_kelly </a> shared 6 hours ago
+                                    <a href="{% url 'profile' id=tweet.profile.user.id %}">{{ tweet.profile.user.username }} </a> shared {{ tweet.pub_datetime|timesince }} ago
                                 </div>
                             </div>
                         </div>
                         <div class="timeline-body">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. </p>
+                            <p>{{ tweet.message }}</p>
 
                         </div>
                     </div>
                 </li>
+            {% endfor %}
             </ul>
             {% else %}
             <div class="alert alert-info">There is no latest tweets</div>
