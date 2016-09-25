@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-md-10 col-md-offset-1">
-            {% if latest_tweets %}
+        {% if latest_tweets %}
             <ul class="timeline">
             {% for tweet in latest_tweets %}
                 <li class="timeline-inverted">
@@ -50,9 +50,9 @@
                 </li>
             {% endfor %}
             </ul>
-            {% else %}
-            <div class="alert alert-info">There is no latest tweets</div>
-            {% endif %}
+        {% else %}
+            <div class="alert alert-info">There are no latest tweets</div>
+        {% endif %}
         </div>
     </div>
 

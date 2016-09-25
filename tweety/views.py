@@ -14,12 +14,12 @@ class TimelineView(TemplateView, View):
     template_name = 'tweety/home.html'
 
     def get(self, request, *args, **kwargs):
-        # TODO: Implement viewing of the tweets from
-        # the users that are being followed
-        if not request.user.is_authenticated and not request.GET.get('example'):
-            return render(request, template_name='index.html')
-
-        return self.render_to_response({})
+        if request.user.is_authenticated:
+            followed = request.user.userprofile.follows.all()
+            latest_tweets = Tweet.objects.filter(profile__in=followed).order_by('-pub_datetime')[:25]
+        else:
+            latest_tweets = Tweet.objects.all().order_by('-pub_datetime')
+        return self.render_to_response({"latest_tweets": latest_tweets})
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -36,7 +36,7 @@ class ProfileView(LoginRequiredMixin, TemplateView, View):
 
     def get(self, request, *args, **kwargs):
         profile = get_object_or_404(UserProfile, pk=kwargs['id'])
-        latest_tweets = profile.tweet_set.all()[:10]
+        latest_tweets = profile.tweet_set.all().order_by('-pub_datetime')[:10]
         return self.render_to_response({
             'latest_tweets': latest_tweets,
             'profile_user': profile.user,
